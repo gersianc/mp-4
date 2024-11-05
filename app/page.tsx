@@ -1,95 +1,60 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+import styled from "styled-components";
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+import {useState} from "react";
+import Link from "next/link";
+
+
+const Heading = styled.h1`
+    width: 100%;
+    background-color: lightgray;
+    text-align: center;
+`;
+
+const StyledText = styled.p`
+    font-size: 1.2rem;
+`;
+
+
+const StyledDiv = styled.div`
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+`;
+
+
+const Input = styled.input`
+    padding: 5px;
+    width: 20%;
+`;
+
+const StyledButton = styled(Link)`
+    background-color: lightblue;
+    border-radius: 15px;
+    text-decoration: none;
+    margin-top: 20px;
+    padding: 10px;
+    
+    &:hover{
+        background-color: cadetblue;
+        color: white;
+        text-decoration: none;
+    }
+`;
+
+export default function Home(){
+    const [city, setCity] = useState("");
+
+    return (
+        <StyledDiv>
+            <Heading>Find the Weather in any city!</Heading>
+            <StyledText>Enter a city name below to get the current weather</StyledText>
+            <Input type="text" value={city} placeholder="City Name" onChange={(e) => setCity(e.target.value)} />
+            <StyledButton href={`/${city}`}>Get Weather</StyledButton>
+        </StyledDiv>
+    );
 }
+
+
